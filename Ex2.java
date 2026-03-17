@@ -1,25 +1,20 @@
 import java.util.Scanner;
+import java.time.*;
 
 public class Ex2 {
-    public static void main (String[] args) {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        System.out.print("Insira um ano para verificar se ele é bissexto: ");
-        int year = sc.nextInt();
+        System.out.print("Informe uma data (AAAA-MM-DD): ");
+        String date = sc.nextLine();
 
-        if (year % 4 == 0) {
-            if (year % 100 == 0) {
-                if (year % 400 == 0) {
-                    System.out.println("O ano é bissexto!");
-                } else {
-                    System.out.println("O ano não é bissexto!");
-                }
-            } else {
-                System.out.println("O ano é bissexto!");
-            }
+        LocalDate local_date = LocalDate.parse(date);
+        if (local_date.isLeapYear() == true) {
+            System.out.println("Este é um ano bissexto.");
         } else {
-            System.out.println("O ano não é bissexto!");
+            System.out.println("Este não é um ano bissexto.");
         }
+        
 
         sc.close();
     }

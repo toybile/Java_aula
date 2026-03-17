@@ -1,23 +1,30 @@
-import java.util.Scanner;
+import java.time.*;
 
 public class Ex3 {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws InterruptedException {
 
-        float[] number_list = new float[3];
+        while (true) {
+            LocalDateTime now = LocalDateTime.now();
 
-        System.out.println("Insira três números: ");
-        for (int i = 0; i < 3; i++) {
-            number_list[i] = sc.nextFloat();
+            LocalDateTime lastMoment = LocalDateTime
+                    .of(now.getYear() + 1, 1, 1, 0, 0)
+                    .minusSeconds(1);
+
+            Duration diff = Duration.between(now, lastMoment);
+
+            long totalSeconds = diff.getSeconds();
+
+            long days = totalSeconds / (24 * 3600);
+            long hours = (totalSeconds % (24 * 3600)) / 3600;
+            long minutes = (totalSeconds % 3600) / 60;
+            long seconds = totalSeconds % 60;
+
+            System.out.print("\rFaltam " + days + " dias, "
+                    + hours + " horas, "
+                    + minutes + " minutos e "
+                    + seconds + " segundos para o fim do ano.");
+
+            Thread.sleep(1000); // atualiza a cada 1 segundo
         }
-
-        float max = number_list[0];
-        for (float number : number_list) {
-            if (number > max) max = number;
-        }
-
-        System.out.println("O maior número dentre os três: " + max);
-
-        sc.close();
     }
 }
